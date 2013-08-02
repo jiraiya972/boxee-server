@@ -1,5 +1,5 @@
 {
-  "name": "server-boxee",
+  "name": "boxee-server",
   "version": "0.0.1",
   "dependencies": {
 	 "express": "*",
