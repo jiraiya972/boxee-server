@@ -1,0 +1,12 @@
+{
+  "name": "server-boxee",
+  "version": "0.0.1",
+  "dependencies": {
+	 "express": "*",
+   "express-subdomains": "*"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  }
+}
