@@ -1,4 +1,14 @@
 node_modules
 .DS_Store
 npm-debug.log
-
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+results
