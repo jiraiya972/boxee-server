@@ -1,0 +1,26 @@
+<message type="recommend" score="0" referral="477411677" source="Facebook">
+	<timestamp>1348242607</timestamp>
+	<description>
+		[object id="FB:100004068334491" property="short_name" /] pliééééééééé !!! MISS COTE D IVOIRE 2012 LA CATASTROPHE D UNE CANDIDATE
+	</description>
+	<userTxt>pliééééééééé !!!</userTxt>
+	<global>0</global>
+	<object type="stream_video" id="stv_2968742511">
+		<name>
+			MISS COTE D IVOIRE 2012 LA CATASTROPHE D UNE CANDIDATE
+		</name>
+		<url>
+			http://www.youtube.com/watch?v=HJQ2XduZjN4&feature=share
+		</url>
+		<thumb>http://i1.ytimg.com/vi/HJQ2XduZjN4/mqdefault.jpg</thumb>
+		<description>LA CANDIDATE TOMBE</description>
+		<content_type>text/html</content_type>
+	</object>
+	<object type="user" id="FB:100004068334491">
+		<name>Jamaikin Marley</name>
+		<short_name>Jamaikin Marley</short_name>
+		<user_display_name>Jamaikin Marley</user_display_name>
+		<thumb>http://graph.facebook.com/100004068334491/picture</thumb>
+		<thumb_small>	</thumb_small>
+	</object>
+</message>
