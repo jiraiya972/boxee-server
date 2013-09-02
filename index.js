@@ -1,15 +1,30 @@
 ﻿var express = require('express'),
-  Url = require('url'),
-    subdomains = require('express-subdomains'),
-	app;
+Url = require('url'),
+subdomains = require('express-subdomains'),
+graph = require('fbgraph'),
+app;
 
 var app = express();
 
 app.use(express.compress());
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.session({ secret: '3164446a7d6f6b707827703a51' }));
+/*app.use(passport.initialize());
+app.use(passport.session());*/
+app.use(subdomains.middleware);
 
 subdomains.domain('boxee.tv');
 subdomains.use('app');
 subdomains.use('res');
+
+// this should really be in a config file!
+var conf = {
+    client_id:      '224073587748308'
+  , client_secret:  'cfd031957421c3eecabf3368f5089dde'
+  , scope:          'email, user_about_me, user_birthday, user_location, publish_stream, read_stream'
+  , redirect_uri:   'http://bsev.local:9001/auth/facebook'
+};
 
 
 app.use(function(req, res, next){
@@ -18,7 +33,57 @@ app.use(function(req, res, next){
   console.log('perso middleware :',req.url);
   next();
 });
-app.use(subdomains.middleware);
+
+app.get('/',function(req, res, next){
+  res.send('<a href="/auth/facebook">Login with Facebook</a>');
+});
+
+app.get('/auth/facebook', function(req, res) {
+
+  // we don't have a code yet
+  // so we'll redirect to the oauth dialog
+  if (!req.query.code) {
+    var authUrl = graph.getOauthUrl({
+        "client_id":     conf.client_id
+      , "redirect_uri":  conf.redirect_uri
+      , "scope":         conf.scope
+    });
+
+    if (!req.query.error) { //checks whether a user denied the app facebook login/permissions
+      res.redirect(authUrl);
+    } else {  //req.query.error == 'access_denied'
+      res.send('access denied');
+    }
+    return;
+  }
+
+  // code is set
+  // we'll send that and get the access token
+  graph.authorize({
+      "client_id":      conf.client_id
+    , "redirect_uri":   conf.redirect_uri
+    , "client_secret":  conf.client_secret
+    , "code":           req.query.code
+  }, function (err, facebookRes) {
+    console.log("FA",facebookRes,err);
+    res.redirect('/UserHasLoggedIn');
+  });
+});
+
+
+// user gets sent here after being authorized
+app.get('/UserHasLoggedIn', function(req, res) {
+  graph.extendAccessToken({
+        "client_id":      conf.client_id
+      , "client_secret":  conf.client_secret
+    }, function (err, facebookRes) {
+       console.log("UHLI",facebookRes,err);
+    });
+  graph.get("me/home", function(err, resuslt) {
+  console.log(resuslt);
+  res.send(resuslt);
+  });
+});
 
 
 app.get('/app/api/login',function(req, res, next){
@@ -48,7 +113,7 @@ app.get('/res/titles/genres',function(req, res, next){
   console.log(req.body);
   console.log(req.files);
   res.setHeader('Content-Type', 'application/xml');
-  res.send('<?xml version="1.0" encoding="UTF-8" ?><genres><genre id="ACTION">Action</genre><genre id="ADVENTURE">Adventure</genre><genre id="ANIMATION">Animation</genre><genre id="BIOGRAPHY">Biography</genre><genre id="COMEDY">Comedy</genre><genre id="CRIME">Crime</genre><genre id="DOCUMENTARY">Documentary</genre><genre id="DRAMA">Drama</genre><genre id="FAMILY">Family</genre><genre id="FANTASY">Fantasy</genre><genre id="GAME_SHOW">Game Show</genre><genre id="HISTORY">History</genre><genre id="HORROR">Horror</genre><genre id="MUSIC">Music</genre><genre id="MUSICAL">Musical</genre><genre id="MYSTERY">Mystery</genre><genre id="NEWS">News</genre><genre id="REALITY_TV">Reality-TV</genre><genre id="ROMANCE">Romance</genre><genre id="SCI_FI">Sci-Fi</genre><genre id="SHORT">Short</genre><genre id="SPORT">Sport</genre><genre id="TALK_SHOW">Talk-Show</genre><genre id="THRILLER">Thriller</genre><genre id="WAR">War</genre><genre id="WESTERN">Western</genre></genres>');
+  res.send('<?xml version="1.0" encoding="UTF-8" ?><genres><genre id="ADVENTURE">Adventure</genre><genre id="ANIMATION">Animation</genre><genre id="BIOGRAPHY">Biography</genre><genre id="COMEDY">Comedy</genre><genre id="CRIME">Crime</genre><genre id="DOCUMENTARY">Documentary</genre><genre id="DRAMA">Drama</genre><genre id="FAMILY">Family</genre><genre id="FANTASY">Fantasy</genre><genre id="GAME_SHOW">Game Show</genre><genre id="HISTORY">History</genre><genre id="HORROR">Horror</genre><genre id="MUSIC">Music</genre><genre id="MUSICAL">Musical</genre><genre id="MYSTERY">Mystery</genre><genre id="NEWS">News</genre><genre id="REALITY_TV">Reality-TV</genre><genre id="ROMANCE">Romance</genre><genre id="SCI_FI">Sci-Fi</genre><genre id="SHORT">Short</genre><genre id="SPORT">Sport</genre><genre id="TALK_SHOW">Talk-Show</genre><genre id="THRILLER">Thriller</genre><genre id="WAR">War</genre><genre id="WESTERN">Western</genre></genres>');
 });
 
 app.listen(9001);

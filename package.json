@@ -2,8 +2,9 @@
   "name": "boxee-server",
   "version": "0.0.1",
   "dependencies": {
-	 "express": "*",
-   "express-subdomains": "git://github.com/jiraiya972/express-subdomains.git"
+    "express": "*",
+    "express-subdomains": "git://github.com/jiraiya972/express-subdomains.git",
+    "fbgraph": "~0.2.7"
   },
   "engines": {
     "node": "0.10.x",
