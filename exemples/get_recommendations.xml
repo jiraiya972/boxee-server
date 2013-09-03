@@ -7,9 +7,27 @@
 		<description>[object id="FB:100001230627056" property="short_name" /]  en 2s on reconnait la pâte de THE QUEEN of Fitness !!!
 		UN SON, UNE CHORE, What else ??!!!  Future love fit, Paris (16.09.2012) - Step Maliama</description>
 		<userTxt>en 2s on reconnait la pâte de THE QUEEN of Fitness !!!
-		UN SON, UNE CHORE, What else ??!!!</userTxt><global>0</global><object type="stream_video" id="stv_4118832380"><name>Future love fit, Paris (16.09.2012) - Step Maliama</name><url>http://www.youtube.com/watch?v=kgTg8aO81Xg</url><label>Play on YouTube</label><thumb>http://i.ytimg.com/vi/kgTg8aO81Xg/0.jpg</thumb><content_type>text/html</content_type><provider>YouTube</provider></object><object type="user" id="FB:100001230627056"><name>Grégory Chevret</name><short_name>Grégory Chevret</short_name><user_display_name>Grégory Chevret</user_display_name><thumb>http://graph.facebook.com/100001230627056/picture</thumb><thumb_small>http://graph.facebook.com/100001230627056/picture</thumb_small></object></message>
-		<message type="recommend" score="0" referral="477411689" source="Facebook">
-			<timestamp>1348242607</timestamp><description>[object id="FB:149844480317" property="short_name" /]    TEASER - Xelo annonce sa présence @ DJ WILLER's Birthday!</description><userTxt></userTxt><global>0</global><object type="stream_video" id="stv_561744891"><name>TEASER - Xelo annonce sa présence @ DJ WILLER's Birthday!</name><url>http://www.youtube.com/watch?v=Fv9tdOlaVNk</url><thumb>http://i3.ytimg.com/vi/Fv9tdOlaVNk/mqdefault.jpg</thumb><description>✪ DJ WILLER's Birthday ✪ VEN. 28 SEPT @ Le Privilège, Paris ! WHITE PARTY ✪ 15 Artistes et une dizaine de Dj's ! Toutes les infos sur la soirée sont ici : ►h...</description><content_type>text/html</content_type></object><object type="user" id="FB:149844480317"><name>BIZOUK.COM</name><short_name>BIZOUK.COM</short_name><user_display_name>BIZOUK.COM</user_display_name><thumb>http://graph.facebook.com/149844480317/picture</thumb><thumb_small>http://graph.facebook.com/149844480317/picture</thumb_small></object></message>
+		UN SON, UNE CHORE, What else ??!!!</userTxt>
+		<global>0</global>
+		<object type="stream_video" id="stv_4118832380">
+			<name>Future love fit, Paris (16.09.2012) - Step Maliama</name>
+			<url>http://www.youtube.com/watch?v=kgTg8aO81Xg</url>
+			<label>Play on YouTube</label>
+			<thumb>http://i.ytimg.com/vi/kgTg8aO81Xg/0.jpg</thumb>
+			<content_type>text/html</content_type>
+			<provider>YouTube</provider>
+		</object>
+		<object type="user" id="FB:100001230627056">
+			<name>Grégory Chevret</name>
+			<short_name>Grégory Chevret</short_name>
+			<user_display_name>Grégory Chevret</user_display_name>
+			<thumb>http://graph.facebook.com/100001230627056/picture</thumb>
+			<thumb_small>http://graph.facebook.com/100001230627056/picture</thumb_small>
+		</object>
+	</message>
+	<message type="recommend" score="0" referral="477411689" source="Facebook">
+			<timestamp>1348242607</timestamp>
+			<description>[object id="FB:149844480317" property="short_name" /]    TEASER - Xelo annonce sa présence @ DJ WILLER's Birthday!</description><userTxt></userTxt><global>0</global><object type="stream_video" id="stv_561744891"><name>TEASER - Xelo annonce sa présence @ DJ WILLER's Birthday!</name><url>http://www.youtube.com/watch?v=Fv9tdOlaVNk</url><thumb>http://i3.ytimg.com/vi/Fv9tdOlaVNk/mqdefault.jpg</thumb><description>✪ DJ WILLER's Birthday ✪ VEN. 28 SEPT @ Le Privilège, Paris ! WHITE PARTY ✪ 15 Artistes et une dizaine de Dj's ! Toutes les infos sur la soirée sont ici : ►h...</description><content_type>text/html</content_type></object><object type="user" id="FB:149844480317"><name>BIZOUK.COM</name><short_name>BIZOUK.COM</short_name><user_display_name>BIZOUK.COM</user_display_name><thumb>http://graph.facebook.com/149844480317/picture</thumb><thumb_small>http://graph.facebook.com/149844480317/picture</thumb_small></object></message>
 			<message type="recommend" score="0" referral="477411686" source="Facebook">
 				<timestamp>1348242607</timestamp><description>[object id="FB:100001230627056" property="short_name" /]  une grande déception de ne pas avoir pu participer ...   Future love fit, Paris (15.09.2012) - Team hilow Mickaël Bard &amp; Maliama</description><userTxt>une grande déception de ne pas avoir pu participer ... </userTxt><global>0</global><object type="stream_video" id="stv_106014310"><name>Future love fit, Paris (15.09.2012) - Team hilow Mickaël Bard &amp; Maliama</name><url>http://www.youtube.com/watch?v=hCsrXo4PqFo&amp;list=ULhCsrXo4PqFo</url><thumb>http://i1.ytimg.com/vi/hCsrXo4PqFo/mqdefault.jpg</thumb><content_type>text/html</content_type></object><object type="user" id="FB:100001230627056"><name>Grégory Chevret</name><short_name>Grégory Chevret</short_name><user_display_name>Grégory Chevret</user_display_name><thumb>http://graph.facebook.com/100001230627056/picture</thumb><thumb_small>http://graph.facebook.com/100001230627056/picture</thumb_small></object></message>
 				<message type="recommend" score="0" referral="477411685" source="Facebook">

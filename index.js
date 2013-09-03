@@ -2,6 +2,7 @@
 Url = require('url'),
 subdomains = require('express-subdomains'),
 graph = require('fbgraph'),
+js2xmlparser = require("js2xmlparser"),
 app;
 
 var app = express();
@@ -21,7 +22,7 @@ subdomains.use('res');
 // this should really be in a config file!
 var conf = {
     client_id:      '224073587748308'
-  , client_secret:  'cfd031957421c3eecabf3368f5089dde'
+  , client_secret:  'ae1b1ff5dc7cdc3c14da54ad563984ae'
   , scope:          'email, user_about_me, user_birthday, user_location, publish_stream, read_stream'
   , redirect_uri:   'http://bsev.local:9001/auth/facebook'
 };
@@ -114,6 +115,91 @@ app.get('/res/titles/genres',function(req, res, next){
   console.log(req.files);
   res.setHeader('Content-Type', 'application/xml');
   res.send('<?xml version="1.0" encoding="UTF-8" ?><genres><genre id="ADVENTURE">Adventure</genre><genre id="ANIMATION">Animation</genre><genre id="BIOGRAPHY">Biography</genre><genre id="COMEDY">Comedy</genre><genre id="CRIME">Crime</genre><genre id="DOCUMENTARY">Documentary</genre><genre id="DRAMA">Drama</genre><genre id="FAMILY">Family</genre><genre id="FANTASY">Fantasy</genre><genre id="GAME_SHOW">Game Show</genre><genre id="HISTORY">History</genre><genre id="HORROR">Horror</genre><genre id="MUSIC">Music</genre><genre id="MUSICAL">Musical</genre><genre id="MYSTERY">Mystery</genre><genre id="NEWS">News</genre><genre id="REALITY_TV">Reality-TV</genre><genre id="ROMANCE">Romance</genre><genre id="SCI_FI">Sci-Fi</genre><genre id="SHORT">Short</genre><genre id="SPORT">Sport</genre><genre id="TALK_SHOW">Talk-Show</genre><genre id="THRILLER">Thriller</genre><genre id="WAR">War</genre><genre id="WESTERN">Western</genre></genres>');
+});
+
+app.get('/app/api/get_recommendations',function(req, res, next){
+  
+
+  /*graph.extendAccessToken({
+        "client_id":      conf.client_id
+      , "client_secret":  conf.client_secret
+    }, function (err, facebookRes) {
+       console.log("UHLI",facebookRes,err);
+    });*/
+  graph.get("me/home", function(err, fbgraph_home) {
+    if(err)
+      return res.send(err);
+    
+    res.setHeader('Content-Type', 'application/xml');
+    console.log(fbgraph_home);
+
+
+    //var file = 'exemples/fbgraph_home.json';
+    //var fbgraph_home = jf.readFileSync(file),
+    var result = fbgraph_home,
+    restFilter = [],
+    restFormat = {
+      timestamp : 1375738726,
+      last : 472527590
+    },
+    xmlrest,
+    config;
+
+
+    var Facebook = require('facebook-node-sdk');
+
+    var facebook = new Facebook({ appID: '373733952708996', secret: 'bcf3d305f547676352a6515124e0c979' });
+
+    facebook.api('/amachang', function(err, data) {
+      console.log(err);
+      console.log(data); // => { id: ... }
+    });
+
+    for (var i = fbgraph_home.data.length - 1; i >= 0; i--) {
+      var item = fbgraph_home.data[i];
+      if(item.link && item.link.indexOf('youtu') > -1){
+        //restFilter.push(item);
+        //console.log(item);
+        var test = {
+          '@' : {type : 'recommend',
+            score : '0',
+            refferral : '477411962',
+            source : 'Facebook'
+          },
+          timestamp : '1348242661',
+          description : (item.message? item.message:item.description) + item.name,
+          userTxt : item.message? item.message:item.description,
+          global : 0,
+          object : [{
+            '@' : {type : "stream_video",
+              id : "stv_4118832380"
+            },
+            name : item.name,
+            url : item.link,
+            label : 'Play on Youtube',
+            thumb : item.picture,
+            content_type : 'text/html',
+            provider : 'Youtube'
+          },{
+            '@' : {type : "user",
+             id : "FB:"+item.from.id
+            },
+            name : item.from.name,
+            short_name : item.from.name,
+            user_display_name : item.from.name,
+            thumb : 'http://graph.facebook.com/'+item.from.id+'/picture',
+            thumb_small : 'http://graph.facebook.com/'+item.from.id+'/picture'
+          }]
+        };
+
+        restFilter.push(test);
+
+      }
+    };
+    restFormat.message = restFilter;
+    res.send(js2xmlparser("boxeefeed", restFormat));
+  });
+  //res.send('<?xml version="1.0" encoding="UTF-8" ?><boxeefeed>  <timestamp>1375738726</timestamp>  <last>472527590</last>  <message type="recommend" score="0" referral="477411962" source="Facebook">    <timestamp>1348242661</timestamp>    <description>[object id="FB:100001230627056" property="short_name" /]  en 2s on reconnait la pâte de THE QUEEN of Fitness !!!    UN SON, UNE CHORE, What else ??!!!  Future love fit, Paris (16.09.2012) - Step Maliama</description>    <userTxt>en 2s on reconnait la pâte de THE QUEEN of Fitness !!!    UN SON, UNE CHORE, What else ??!!!</userTxt>    <global>0</global>    <object type="stream_video" id="stv_4118832380">      <name>Future love fit, Paris (16.09.2012) - Step Maliama</name>      <url>http://www.youtube.com/watch?v=kgTg8aO81Xg</url>      <label>Play on YouTube</label>      <thumb>http://i.ytimg.com/vi/kgTg8aO81Xg/0.jpg</thumb>      <content_type>text/html</content_type>      <provider>YouTube</provider>    </object>    <object type="user" id="FB:100001230627056">      <name>Grégory Chevret</name>      <short_name>Grégory Chevret</short_name>      <user_display_name>Grégory Chevret</user_display_name>      <thumb>http://graph.facebook.com/100001230627056/picture</thumb>      <thumb_small>http://graph.facebook.com/100001230627056/picture</thumb_small>    </object>  </message></boxeefeed>');
 });
 
 app.listen(9001);
