@@ -29,6 +29,7 @@ var conf = {
 
 
 app.use(function(req, res, next){
+  console.log('perso middleware origin :',req.url);
   var url = Url.parse(req.url)
   req.url = url.pathname;
   console.log('perso middleware :',req.url);

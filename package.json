@@ -6,7 +6,6 @@
     "express-subdomains": "git://github.com/jiraiya972/express-subdomains.git",
     "fbgraph": "~0.2.7",
     "jsonfile": "~1.0.0",
-    "easyxml": "0.0.4",
     "js2xmlparser": "~0.1.0"
   },
   "engines": {
